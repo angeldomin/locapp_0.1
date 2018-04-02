@@ -121,6 +121,7 @@ export class BuscadorPage {
     this._CONTEXT.lineTo(this._CANVAS.width/2-30, 60);
     this._CONTEXT.moveTo(this._CANVAS.width/2+30, 60);
     this._CONTEXT.lineTo(this._CANVAS.width/2, 5);
+    //this._CONTEXT.lineJoin = 'miter'; // para terminar en punta pero no le hago funcionar :(
     this._CONTEXT.lineCap="round";
     this._CONTEXT.lineWidth = 15;
     this._CONTEXT.strokeStyle = '#c82124';
