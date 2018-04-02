@@ -10,5 +10,21 @@
 
 
 <ion-content padding>
+    <div class="ion-canvas">
+      <canvas #canvas></canvas>
+    </div>
+    <button
+      ion-button
+      color="primary"
+      (click)="drawCircle()">
+      Draw circles
+   </button>
+   <button
+      ion-button
+      color="primary"
+      (click)="drawRadar(50)">
+      Draw a Radar
+   </button>
+   
 
 </ion-content>

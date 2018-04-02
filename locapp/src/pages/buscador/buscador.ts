@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,  ElementRef,  ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
@@ -15,11 +15,103 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class BuscadorPage {
 
+  NUMERO_DE_ARCOS = 6;
+
+  @ViewChild('canvas') canvasEl : ElementRef;
+
+  /** Reference Canvas object  */
+  private _CANVAS  : any;
+
+  /** Reference the context for the Canvas element  */
+  private _CONTEXT : any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+  }
+
+  ngOnInit() {
+    
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad BuscadorPage');
+    this._CANVAS 	    = this.canvasEl.nativeElement;
+    this._CANVAS.width  	= 250;
+    this._CANVAS.height 	= 250;
+    
+    this.initialiseCanvas();
+    //this.drawCircle();
+  }
+
+  initialiseCanvas() {
+    if(this._CANVAS.getContext) {
+        this.setupCanvas();
+    }
+  }
+
+  setupCanvas() {
+    this._CONTEXT = this._CANVAS.getContext('2d');
+    this._CONTEXT.fillStyle = "#3e3e3e";
+    this._CONTEXT.fillRect(0, 0, 500, 500);
+  }
+
+  clearCanvas() {
+    this._CONTEXT.clearRect(0, 0, this._CANVAS.width, this._CANVAS.height);
+    this.setupCanvas();
+  }
+
+  drawCircle() {
+    this.clearCanvas();
+    this._CONTEXT.beginPath();
+    // x, y, radius, startAngle, endAngle
+    this._CONTEXT.arc(this._CANVAS.width/2, this._CANVAS.height/2, 120, 0, 2 * Math.PI);  
+    this._CONTEXT.arc(this._CANVAS.width/2, this._CANVAS.height/2, 100, 0, 2 * Math.PI);    
+    this._CONTEXT.arc(this._CANVAS.width/2, this._CANVAS.height/2, 80, 0, 2 * Math.PI);    
+    this._CONTEXT.lineWidth = 1;
+    this._CONTEXT.strokeStyle = '#ffffff';
+    this._CONTEXT.stroke(); 
+    this._CONTEXT.closePath();    
+    this._CONTEXT.beginPath();
+    this._CONTEXT.arc(this._CANVAS.width/2, this._CANVAS.height/2, 60, 0, 2 * Math.PI);    
+    this._CONTEXT.lineWidth = 2;
+    this._CONTEXT.strokeStyle = '#c82124';
+    this._CONTEXT.stroke(); 
+    this._CONTEXT.closePath();
+    this._CONTEXT.beginPath();    
+    this._CONTEXT.arc(this._CANVAS.width/2, this._CANVAS.height/2, 40, 0, 2 * Math.PI);
+    this._CONTEXT.arc(this._CANVAS.width/2, this._CANVAS.height/2, 20, 0, 2 * Math.PI);    
+    this._CONTEXT.lineWidth = 1;
+    this._CONTEXT.strokeStyle = '#ffffff';
+    this._CONTEXT.stroke(); 
+    this._CONTEXT.closePath();
+  }
+
+  // le pasaremos un número que puede ser directamente el valor de la potencia de la señal
+  // y a partir de eso calculará el círculo a pintar en rojo y el resto en gris
+  drawRadar(senial:number) {
+    let radio_max = 120; // seteo el radio exterior
+    let radio = radio_max;
+    let arco_actual = this.NUMERO_DE_ARCOS;
+    // distancia tendrá el arco que corresponde para esa señal
+    let distancia = Math.round(senial/(radio/this.NUMERO_DE_ARCOS));//radio es el arco mas grande posible
+    // dibujamos los arcos
+    for(let i = 0; i < this.NUMERO_DE_ARCOS; i++) {
+      console.log('Distancia =', distancia);
+      console.log('Arco actual =', arco_actual);
+      this._CONTEXT.beginPath();
+      if (distancia===arco_actual) {
+        this._CONTEXT.arc(this._CANVAS.width/2, this._CANVAS.height/2, radio, 0, 2 * Math.PI); // x, y, radius, startAngle, endAngle 
+        this._CONTEXT.lineWidth = 5;
+        this._CONTEXT.strokeStyle = '#c82124';
+      } else {
+        this._CONTEXT.arc(this._CANVAS.width/2, this._CANVAS.height/2, radio, 0, 2 * Math.PI); // x, y, radius, startAngle, endAngle 
+        this._CONTEXT.lineWidth = 1;
+        this._CONTEXT.strokeStyle = '#ffffff';
+      }      
+      this._CONTEXT.stroke(); 
+      this._CONTEXT.closePath();
+      radio = radio - (radio_max/this.NUMERO_DE_ARCOS);
+      arco_actual--;
+    }
   }
 
 }
