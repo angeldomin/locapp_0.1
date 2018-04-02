@@ -39,7 +39,7 @@ export class BuscadorPage {
     this._CANVAS.height 	= 250;
     
     this.initialiseCanvas();
-    //this.drawCircle();
+    
   }
 
   initialiseCanvas() {
@@ -50,7 +50,7 @@ export class BuscadorPage {
 
   setupCanvas() {
     this._CONTEXT = this._CANVAS.getContext('2d');
-    this._CONTEXT.fillStyle = "#3e3e3e";
+    this._CONTEXT.fillStyle = "#6b9b83";
     this._CONTEXT.fillRect(0, 0, 500, 500);
   }
 
