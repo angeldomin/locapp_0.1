@@ -93,6 +93,7 @@ export class BuscadorPage {
     let arco_actual = this.NUMERO_DE_ARCOS;
     // distancia tendrá el arco que corresponde para esa señal
     let distancia = Math.round(senial/(radio/this.NUMERO_DE_ARCOS));//radio es el arco mas grande posible
+    this.clearCanvas();
     // dibujamos los arcos
     for(let i = 0; i < this.NUMERO_DE_ARCOS; i++) {
       console.log('Distancia =', distancia);
