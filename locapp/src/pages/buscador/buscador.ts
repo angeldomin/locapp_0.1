@@ -1,5 +1,6 @@
 import { Component,  ElementRef,  ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Usuario } from '../../models/usuario';
 
 /**
  * Generated class for the BuscadorPage page.
@@ -25,21 +26,32 @@ export class BuscadorPage {
   /** Reference the context for the Canvas element  */
   private _CONTEXT : any;
 
+  usuario: Usuario;
+  modo: String;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+    if (navParams.get('usuario')) {
+      this.usuario = navParams.get('usuario');
+    } else {
+      this.usuario = new Usuario('', '', '', '', 0, '', '');
+    }
 
-  ngOnInit() {
+    if (navParams.get('mode')) {
+      this.modo = navParams.get('mode');
+    } else {
+      this.modo = '';
+    }
     
+    
+    console.log('Usuario: ', this.usuario);
+    console.log('Modo: ',this.modo);
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad BuscadorPage');
+  ionViewDidLoad() {    
     this._CANVAS 	    = this.canvasEl.nativeElement;
     this._CANVAS.width  	= 250;
-    this._CANVAS.height 	= 250;
-    
-    this.initialiseCanvas();
-    
+    this._CANVAS.height 	= 250;    
+    this.initialiseCanvas();    
   }
 
   initialiseCanvas() {

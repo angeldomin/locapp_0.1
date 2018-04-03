@@ -3,21 +3,20 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Lista de dispositivos</ion-title>
+    <ion-title>Lista de usuarios</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-start></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-end>
-        {{item.note}}
-      </div>
+    <button ion-item *ngFor="let usuario of usuarios" (click)="seleccionar(usuario)">
+      {{usuario.nombre}} {{usuario.apellido1}}      
     </button>
   </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
+  <div *ngIf="selectedUser" padding>
+    Has seleccionado el usuario <b>{{selectedUser.nombre}}</b>
+    <button ion-button (click)="buscar(selectedUser)">
+      Iniciar búsqueda
+    </button>
   </div>
 </ion-content>
