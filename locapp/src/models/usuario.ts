@@ -5,6 +5,7 @@ export class Usuario {
         public apellido1: string,
         public apellido2: string,
         public edad: number,
+        public image: string,
         public id_dispositivo: string
     ) {}
 }

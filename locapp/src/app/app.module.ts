@@ -10,6 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { BuscadorPage } from '../pages/buscador/buscador';
 import { NewDispositivoPage } from '../pages/new-dispositivo/new-dispositivo';
+import { UsuarioPage } from '../pages/usuario/usuario';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { NewDispositivoPage } from '../pages/new-dispositivo/new-dispositivo';
     HomePage,
     ListPage,
     BuscadorPage,
-    NewDispositivoPage
+    NewDispositivoPage,
+    UsuarioPage
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,8 @@ import { NewDispositivoPage } from '../pages/new-dispositivo/new-dispositivo';
     HomePage,
     ListPage,
     BuscadorPage,
-    NewDispositivoPage
+    NewDispositivoPage,
+    UsuarioPage
   ],
   providers: [
     StatusBar,

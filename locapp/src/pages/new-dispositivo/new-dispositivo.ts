@@ -26,10 +26,10 @@ export class NewDispositivoPage {
   }
 
   buscar() {
-    this.dispositivos = [ new Dispositivo ('000000000', 'Dispositivo 0', 'Dispositivo simulado 0')];
-    this.dispositivos.push( new Dispositivo('000000001', 'Dispositivo 1', 'Dispositivo simulado 1') );
-    this.dispositivos.push( new Dispositivo('000000002', 'Dispositivo 2', 'Dispositivo simulado 2') );
-    this.dispositivos.push( new Dispositivo('000000003', 'Dispositivo 3', 'Dispositivo simulado 3') );
+    this.dispositivos = [ new Dispositivo ('ID01', '000000000', 'Dispositivo 0', 'Dispositivo simulado 0')];
+    this.dispositivos.push( new Dispositivo('ID02', '000000001', 'Dispositivo 1', 'Dispositivo simulado 1') );
+    this.dispositivos.push( new Dispositivo('ID03', '000000002', 'Dispositivo 2', 'Dispositivo simulado 2') );
+    this.dispositivos.push( new Dispositivo('ID04', '000000003', 'Dispositivo 3', 'Dispositivo simulado 3') );
   }
 
   registrar(dispositivo: Dispositivo) {
