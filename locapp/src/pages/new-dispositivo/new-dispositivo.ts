@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Dispositivo } from '../../models/dispositivo'
+import { Usuario } from '../../models/usuario';
 
 /**
  * Generated class for the NewDispositivoPage page.
  *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * Aquí la búsqueda de dispositivos y asignación a un usuario.
  */
 
 @IonicPage()
@@ -16,16 +16,33 @@ import { Dispositivo } from '../../models/dispositivo'
 })
 export class NewDispositivoPage {
 
+  dispositivosConocidos : Dispositivo[];
   dispositivos : Dispositivo[];
+  usuario : Usuario;
+  callback;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad NewDispositivoPage');
+  ionViewDidLoad() {    
+    this.usuario = this.navParams.get('usuario');
+    this.callback = this.navParams.get('callback');
+
+    /* Buscamos dispositivos guardados anteriormente.
+      puede que tengamos que diferenciar los que están asignados de los que no y mostrar algo distinto (color o icono) 
+      y la posibilidad de quitar asignacion anterior y asignar a otro usuario, igual se puede mostrar el color en rojo
+      si está en uso y gris si no y meter botón de olvidar
+    */
+
+    // buscar los dispositivos guardados anteriormente
+    // simulamos esta busqueda en nuestra base de datos (no se si necesitaremos indicador de asignado)
+    this.dispositivosConocidos = [ new Dispositivo ('ID11', '000000011', 'Dispositivo 11', 'Dispositivo conocido 11')];
+    this.dispositivosConocidos.push( new Dispositivo('ID12', '000000012', 'Dispositivo 12', 'Dispositivo conocido 12') );
+       
   }
 
   buscar() {
+    // simulado
     this.dispositivos = [ new Dispositivo ('ID01', '000000000', 'Dispositivo 0', 'Dispositivo simulado 0')];
     this.dispositivos.push( new Dispositivo('ID02', '000000001', 'Dispositivo 1', 'Dispositivo simulado 1') );
     this.dispositivos.push( new Dispositivo('ID03', '000000002', 'Dispositivo 2', 'Dispositivo simulado 2') );
@@ -33,6 +50,14 @@ export class NewDispositivoPage {
   }
 
   registrar(dispositivo: Dispositivo) {
-    //navegaremos a la pagina de registrar dispositivo
+    this.usuario.id_dispositivo = dispositivo._id;
+    // hacemos uso de callback para pasar el usuario modificado con el id del dispositivo   
+    this.callback(this.usuario).then(()=>{      
+      this.navCtrl.pop();
+    });
+    
   }
+
+ 
+
 }

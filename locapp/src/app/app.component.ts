@@ -24,10 +24,10 @@ export class MyApp {
     
     this.pages = [
       { title: 'Inicio', component: HomePage },
-      { title: 'Dispositivos', component: ListPage },
-      { title: 'Buscador', component: BuscadorPage },
-      { title: 'Nuevo Dispositivo', component: NewDispositivoPage },
-      { title: 'Nuevo Usuario', component: UsuarioPage }
+      { title: 'Nuevo Usuario', component: UsuarioPage },
+      { title: 'Usuarios', component: ListPage },
+      { title: 'Dispositivos', component: NewDispositivoPage },
+      { title: 'Buscador', component: BuscadorPage }      
     ];
 
   }
