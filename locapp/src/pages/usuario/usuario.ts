@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { HttpModule } from '@angular/http';
 import { NewDispositivoPage } from '../new-dispositivo/new-dispositivo';
 import { Usuario } from '../../models/usuario';
 import { HomePage } from '../../pages/home/home';
+import { FirebaseServiceProvider } from '../../providers/firebase-service/firebase-service';
 
 /**
  * Generated class for the UsuarioPage page.
@@ -21,7 +23,11 @@ export class UsuarioPage {
 
   public usuario : Usuario;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public _firebaseService: FirebaseServiceProvider
+  ) {
     // si estamos en modo new inicializamos el usuario
     this.usuario = new Usuario('', '', '', '', 0, '', '');
     // si es edit los datos del usuario los tendremos, o bien pasados directamente o a partir por ejemplo del id buscar el resto de base de datos
@@ -31,8 +37,9 @@ export class UsuarioPage {
     
   }
 
-  newUser() {
+  newUser(usuario: Usuario) {
     // conectamos con base de datos y damos de alta un nuevo usuario
+    this._firebaseService.newUsuario(usuario);
   }
 
   editUser() {
@@ -61,6 +68,7 @@ export class UsuarioPage {
   // guardamos los datos en bbdd y navegamos a inicio
   guardar() {    
     console.log('TODO Guardamos el usuario ', this.usuario);
+    this.newUser(this.usuario);
     this.navCtrl.setRoot(HomePage);
     this.navCtrl.goToRoot;    
   }
