@@ -16,7 +16,7 @@ export class FirebaseServiceProvider {
 
   newUsuario(usuario:Usuario) {
     
-    const usuarioRef: firebase.database.Reference = firebase.database().ref('/usuario/');
+    const usuariosRef: firebase.database.Reference = firebase.database().ref('/usuarios/');
     
     const _id = usuario._id;
     const nombre = usuario.nombre;
@@ -26,7 +26,7 @@ export class FirebaseServiceProvider {
     const imagen = usuario.image;
     const id_dispositivo = usuario.id_dispositivo;
     
-    usuarioRef.set({
+    usuariosRef.set({
       _id,
       nombre,
       apellido1,
