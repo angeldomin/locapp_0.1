@@ -3,6 +3,10 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import { Usuario } from '../../models/usuario';
 import { Firebase } from '@ionic-native/firebase';
+import { AngularFireList } from 'angularfire2/database/interfaces';
+// import { Observable } from '@firebase/util/dist/esm/src/subscribe';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 
 /*  
   Este service se encargará de las operaciones con la base de datos firebase.
@@ -11,9 +15,13 @@ import { Firebase } from '@ionic-native/firebase';
 @Injectable()
 export class FirebaseServiceProvider {
 
+  usuariosRef: AngularFireList<any>;
+  usuariosSalida$: Observable<any[]>;
+
   constructor(
     public http: HttpClient,
-    private _firebase: Firebase
+    private _firebase: Firebase,
+    public dataBase: AngularFireDatabase
   ) {
     console.log('Hello FirebaseServiceProvider Provider');
     firebase.auth().signInAnonymously().catch(function(error) {
@@ -47,8 +55,13 @@ export class FirebaseServiceProvider {
       // ...
     });
 
-  }
+    this.usuariosRef = this.dataBase.list('/usuarios/');
+    this.usuariosSalida$ = this.usuariosRef.snapshotChanges().map(changes => {
+      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+    });
 
+  }
+ 
   newUsuario(usuario:Usuario) {
         
     const usuariosRef: firebase.database.Reference = firebase.database().ref('/usuarios/');
@@ -97,8 +110,9 @@ export class FirebaseServiceProvider {
   }
 
   getUsuario() {
-    const usuariosRef: firebase.database.Reference = firebase.database().ref('/usuarios/');
-    console.log(usuariosRef.toJSON);
+    // const usuariosRef: firebase.database.Reference = firebase.database().ref('/usuarios/');
+    // console.log(usuariosRef.toJSON);
+   
   }
 
   

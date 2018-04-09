@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Usuario } from '../../models/usuario';
 import { BuscadorPage } from '../buscador/buscador';
+import { Subscription } from 'rxjs/Subscription';
+import { FirebaseServiceProvider } from '../../providers/firebase-service/firebase-service';
 
 @Component({
   selector: 'page-list',
@@ -11,15 +13,17 @@ export class ListPage {
 
   selectedUser: any;
   usuarios: Usuario[];
+  usuariosRef: Subscription;
   
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              private _firebaseService: FirebaseServiceProvider) {
 
-    // TODO traemos de base de datos la lista de usuarios registrados
-
-    // datos simulados
-    this.usuarios = [new Usuario('', 'Cloud', 'Strife', 'FF7', 25, '', ''),
-                    new Usuario('', 'Tifa', 'Lockhart', 'FF7', 23, '', '')
-    ];
+    // traemos de base de datos la lista de usuarios registrados
+    // nos suscribimos a observable de usuarios, la lista de usuarios guardados en base de datos
+    this.usuariosRef = this._firebaseService.usuariosSalida$.subscribe(response => {
+      this.usuarios = response;
+    })
 
   }
 
