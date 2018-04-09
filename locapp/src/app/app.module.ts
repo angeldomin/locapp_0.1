@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { Firebase } from '@ionic-native/firebase';
+import { BLE } from '@ionic-native/ble';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -62,7 +63,8 @@ firebase.initializeApp(firebaseConfig);
     SplashScreen,
     Firebase,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    FirebaseServiceProvider
+    FirebaseServiceProvider,
+    BLE
   ]
 })
 export class AppModule {}

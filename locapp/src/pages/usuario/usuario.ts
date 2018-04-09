@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { HttpModule } from '@angular/http';
 import { NewDispositivoPage } from '../new-dispositivo/new-dispositivo';
 import { Usuario } from '../../models/usuario';
 import { HomePage } from '../../pages/home/home';
