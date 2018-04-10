@@ -21,6 +21,7 @@ import { FirebaseServiceProvider } from '../providers/firebase-service/firebase-
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
+import { BleServiceProvider } from '../providers/ble-service/ble-service';
 
 // configuracion de la base de datos proporcionada por mi firebase
 export const firebaseConfig = {
@@ -64,7 +65,8 @@ firebase.initializeApp(firebaseConfig);
     Firebase,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FirebaseServiceProvider,
-    BLE
+    BLE,
+    BleServiceProvider
   ]
 })
 export class AppModule {}

@@ -87,7 +87,8 @@ export class FirebaseServiceProvider {
     });*/
 
     // este funciona 
-    usuariosRef.push({_id,
+    usuariosRef.push({
+      _id,
       nombre,
       apellido1,
       apellido2,
@@ -107,6 +108,7 @@ export class FirebaseServiceProvider {
 
   deleteUsuario(){
     // mirar removeValue() o setValue() null
+
   }
 
   getUsuario() {

@@ -13,7 +13,7 @@ import { FirebaseServiceProvider } from '../../providers/firebase-service/fireba
  *
  */
 
-@IonicPage()
+@IonicPage() 
 @Component({
   selector: 'page-usuario',
   templateUrl: 'usuario.html',
