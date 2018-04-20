@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Dispositivo } from '../../models/dispositivo'
 import { Usuario } from '../../models/usuario';
+import { Subscription } from 'rxjs/Subscription';
+import { BleServiceProvider } from '../../providers/ble-service/ble-service';
 
 /**
  * Generated class for the NewDispositivoPage page.
@@ -20,8 +22,14 @@ export class NewDispositivoPage {
   dispositivos : Dispositivo[];
   usuario : Usuario;
   callback;
+  dispositivosRef: Subscription;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    private _bleService: BleServiceProvider
+  ) {    
+    
   }
 
   ionViewDidLoad() {    
@@ -38,7 +46,7 @@ export class NewDispositivoPage {
     // simulamos esta busqueda en nuestra base de datos (no se si necesitaremos indicador de asignado)
     this.dispositivosConocidos = [ new Dispositivo ('ID11', '000000011', 'Dispositivo 11', 'Dispositivo conocido 11')];
     this.dispositivosConocidos.push( new Dispositivo('ID12', '000000012', 'Dispositivo 12', 'Dispositivo conocido 12') );
-       
+        
   }
 
   buscar() {
@@ -47,6 +55,16 @@ export class NewDispositivoPage {
     this.dispositivos.push( new Dispositivo('ID02', '000000001', 'Dispositivo 1', 'Dispositivo simulado 1') );
     this.dispositivos.push( new Dispositivo('ID03', '000000002', 'Dispositivo 2', 'Dispositivo simulado 2') );
     this.dispositivos.push( new Dispositivo('ID04', '000000003', 'Dispositivo 3', 'Dispositivo simulado 3') );
+    // verdadero 
+
+    // nos suscribimos a observable de dispositivos, la lista de dispositivos que encuentra
+    this.dispositivosRef = this._bleService.dispositivosSalida$.subscribe(response => {
+      this.dispositivos = response;
+    })
+    
+    this._bleService.scan();
+
+    
   }
 
   registrar(dispositivo: Dispositivo) {

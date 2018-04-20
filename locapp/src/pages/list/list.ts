@@ -4,6 +4,7 @@ import { Usuario } from '../../models/usuario';
 import { BuscadorPage } from '../buscador/buscador';
 import { Subscription } from 'rxjs/Subscription';
 import { FirebaseServiceProvider } from '../../providers/firebase-service/firebase-service';
+import { UsuarioPage } from '../usuario/usuario';
 
 @Component({
   selector: 'page-list',
@@ -33,6 +34,10 @@ export class ListPage {
   
   buscar(usuario) {
     this.navCtrl.push(BuscadorPage, {usuario: usuario, mode: 'edit'});
+  }
+
+  nuevoUsuario() {
+    this.navCtrl.push(UsuarioPage, {});
   }
 
 }

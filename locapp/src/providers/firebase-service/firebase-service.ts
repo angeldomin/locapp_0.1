@@ -4,7 +4,6 @@ import * as firebase from 'firebase';
 import { Usuario } from '../../models/usuario';
 import { Firebase } from '@ionic-native/firebase';
 import { AngularFireList } from 'angularfire2/database/interfaces';
-// import { Observable } from '@firebase/util/dist/esm/src/subscribe';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 

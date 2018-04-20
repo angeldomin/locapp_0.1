@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BLE } from '@ionic-native/ble';
 import { Observable } from 'rxjs/Observable';
+import { Dispositivo } from '../../models/dispositivo';
 
 /*
   Generated class for the BleServiceProvider provider.
@@ -12,14 +13,44 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class BleServiceProvider {
 
-  dispositivosSalida$: Observable<any[]>; // observable para recuperar los dispositivos que encontramos al escanear
+  public dispositivosSalida$: Observable<any[]>; // observable para recuperar los dispositivos que encontramos al escanear
+
+  private dummyData = { 
+    json: function() { 
+        return [ { 
+            name: 'Battery Demo',
+            id: '20:FF:D0:FF:D1:C0',
+            advertising: [2,1,6,3,3,15,24,8,9,66,97,116,116,101,114,121],
+            rssi: -55
+        }, { 
+            name: 'Battery Demo',
+            id: '20:FF:D0:FF:D1:C0',
+            advertising: [2,1,6,3,3,15,24,8,9,66,97,116,116,101,114,121],
+            rssi: -55 } 
+        ]
+    }
+  } 
 
   constructor(
     public http: HttpClient,
     private _ble: BLE
   ) {
-    console.log('Hello BleServiceProvider Provider');
+    console.log('Hello BleServiceProvider Provider');   
+    /*
+    this.dispositivosSalida$ = [ {
+        name: 'Battery Demo',
+        id: '20:FF:D0:FF:D1:C0',
+        advertising: [2,1,6,3,3,15,24,8,9,66,97,116,116,101,114,121],
+        rssi: -55
+    }, { 
+        name: 'Battery Demo',
+        id: '20:FF:D0:FF:D1:C0',
+        advertising: [2,1,6,3,3,15,24,8,9,66,97,116,116,101,114,121],
+        rssi: -55 } 
+    ];*/
+    this.dispositivosSalida$ = null;  
   }
+  
 
   scan() { // sin probar de momento
     this._ble.scan([], 5).subscribe(response => {
