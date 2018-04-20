@@ -4,6 +4,7 @@ import { NewDispositivoPage } from '../new-dispositivo/new-dispositivo';
 import { Usuario } from '../../models/usuario';
 import { HomePage } from '../../pages/home/home';
 import { FirebaseServiceProvider } from '../../providers/firebase-service/firebase-service';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
 /**
  * Generated class for the UsuarioPage page.
@@ -25,7 +26,8 @@ export class UsuarioPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public _firebaseService: FirebaseServiceProvider
+    public _firebaseService: FirebaseServiceProvider,
+    private alertCtrl: AlertController
   ) {
     // si estamos en modo new inicializamos el usuario
     this.usuario = new Usuario('', '', '', '', 0, '', '');
@@ -68,8 +70,19 @@ export class UsuarioPage {
   guardar() {    
     console.log('TODO Guardamos el usuario ', this.usuario);
     this.newUser(this.usuario);
+    this.presentAlert();
     this.navCtrl.setRoot(HomePage);
     this.navCtrl.goToRoot;    
+  }
+
+  // alert de aviso de nuevo usuario
+  presentAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Nuevo usuario',
+      subTitle: 'Usuario nuevo registrado correctamente.',
+      buttons: ['Cerrar']
+    });
+    alert.present();
   }
 
 }

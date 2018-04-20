@@ -84,9 +84,9 @@ export class FirebaseServiceProvider {
       imagen,
       id_dispositivo 
     });*/
-
-    // este funciona 
-    usuariosRef.push({
+    // mirar aquí https://firebase.google.com/docs/database/admin/save-data
+    // este funciona y en newPostRef guardamos la referencia unica al objeto que guardamos
+    var newPostRef = usuariosRef.push({
       _id,
       nombre,
       apellido1,
@@ -95,7 +95,8 @@ export class FirebaseServiceProvider {
       imagen,
       id_dispositivo
     });
-
+    var postId = newPostRef.key; // obtenemos el id único
+    // TODO TAJO usuariosRef.child("postId").set(_id: postId);
     // console.log(this._firebase.getValue('usuarios', '4ltcRquTh4zI0XbhkMOE'));
     // console.log(usuariosRef);
     console.log('provider firebase');
@@ -105,9 +106,11 @@ export class FirebaseServiceProvider {
     // mirar a ver si se hace con set
   }
 
-  deleteUsuario(){
+  deleteUsuario(usuario){
     // mirar removeValue() o setValue() null
-
+    const usuariosRef: firebase.database.Reference = firebase.database().ref('/usuarios/');
+    var userRef = usuariosRef. child(usuario);
+    usuariosRef.
   }
 
   getUsuario() {
@@ -115,6 +118,31 @@ export class FirebaseServiceProvider {
     // console.log(usuariosRef.toJSON);
    
   }
+
+  /*
+Temas por hacer:
+
+- Generar apk o buscar método para probarlo en el movil
+- Terminar la busqueda de dispositivos y comprobarla 
+(necesitamos bluetooth así que necesitamos apk o manera de probarlo en movil para esto)
+- Preparar aviso cuando se separe cierta distancia
+- Hacer página de configurar distancia para el aviso
+- Implementar borrado de usuario de base de datos
+- Implementar edición de usuario
+- Textos en literales para cambio de idioma etc
+- Mostrar mensaje de todo ok cuando damos de alta nuevo usuario porque redirije al inicio 
+y no sabemos si ha ido bien -> Con Alert puede quedar bien
+
+
+Dudas:
+
+- ¿En la pantalla de inicio que queremos que aparezca?
+
+- ¿Que datos serán necesarios de los usuarios (niños)? 
+Para saber que quetenemos que guardar en base de  datos y recuperar en los registros.
+
+- Colores, diseño, etc. ¿lo hago como yo vea?
+  */
 
   
 } 
