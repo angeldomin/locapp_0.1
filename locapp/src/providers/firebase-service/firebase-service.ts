@@ -110,7 +110,7 @@ export class FirebaseServiceProvider {
     // mirar removeValue() o setValue() null
     const usuariosRef: firebase.database.Reference = firebase.database().ref('/usuarios/');
     var userRef = usuariosRef. child(usuario);
-    usuariosRef.
+    
   }
 
   getUsuario() {
